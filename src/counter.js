@@ -6,7 +6,7 @@ const style = {
         margin: 15
     }
 }
-const API_URL =`https://poniedzialek-60723.firebaseio.com/cwiczeniafirebase`
+const API_URL = `https://poniedzialek-60723.firebaseio.com/cwiczeniafirebase`
 class Counter extends React.Component {
     state = {
         number: 0
@@ -21,29 +21,11 @@ class Counter extends React.Component {
     decHandler = () => (
         this.setState({ number: this.state.number - 1 })
     )
-    saveToFirebase = () => (
-        fetch(`${API_URL}.json`, {
-            method: 'PUT',
-            body: JSON.stringify(this.state.number)
-        })
-    )
-    loadData = () => (
-        fetch(`${API_URL}.json`, {
-            method: 'GET',
-        }
-        ).then(response => response.json())
-            .then(data => (this.setState({ number: data },console.log(data))
-            )
-            )
-    )
-    componentDidUpdate = () => (
-        this.saveToFirebase()
-    )
     render() {
         return (
             <div>
                 <div>
-                    <div>{this.state.number}</div>
+                    <div style={style.button}>{this.state.number}</div>
                     <Button
                         onClick={this.incHandler}
                         label={'+'}
