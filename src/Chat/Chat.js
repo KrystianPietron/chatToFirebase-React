@@ -3,13 +3,25 @@ import Input from './inputComponent'
 import { mapObjectToArray } from '../utils'
 import { database } from '../firebaseConfig'
 import MessageList from './MessagesList'
+import Paper from 'material-ui/Paper'
 
 const databaseMessages = database.ref('/chat')
-
+const style = {
+    paper: {
+        padding: 15,
+        margin: 15,
+        marginBottom: 0,
+        position: 'fixed',
+        bottom: 0,
+        zindedx: 9999,
+        width: '98%'
+    }
+}
 class Chat extends React.Component {
     state = {
         messages: [],
-        newMessageText: ''
+        newMessageText: '',
+
     }
 
     componentDidMount = () => (
@@ -42,19 +54,23 @@ class Chat extends React.Component {
         return (
             <div>
                 <div>Chat :D</div>
-                <Input
-                    hintText={"Message"}
-                    onChange={this.valueHandle}
-                    value={this.state.newMessageText}
-                    onClick={this.onNewMessage}
-                    label={"Send"}
-                    primary={true}
-                />
                 <div>
                     <MessageList
                         message={this.state.messages} />
 
                 </div>
+                <Paper style={style.paper}
+                   >
+                    <Input
+                        hintText={"Message"}
+                        onChange={this.valueHandle}
+                        value={this.state.newMessageText}
+                        onClick={this.onNewMessage}
+                        label={"Send"}
+                        primary={true}
+                        fullWidth
+                    />
+                </Paper>
             </div>
         )
     }

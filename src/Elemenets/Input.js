@@ -6,6 +6,7 @@ const Input = (props) => (
         hintText={props.hintText}
         value={props.value}
         onChange={props.onChange}
+        fullWidth={props.fullWidth}
     />
 )
 export default Input

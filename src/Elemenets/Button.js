@@ -7,6 +7,7 @@ const Button = (props) => (
         label={props.label}
         primary={props.primary}
         style={props.style}
+        fullWidth={props.fullWidth}
     />
 )
 export default Button
