@@ -1,7 +1,8 @@
 import React from 'react'
 import Forms from './Forms'
 import Paper from 'material-ui/Paper'
-import { auth } from '../firebaseConfig'
+import { auth, googleProvider } from '../firebaseConfig'
+import FloatingActionButton from 'material-ui/FloatingActionButton'
 
 const style = {
     buttons: {
@@ -24,32 +25,51 @@ class Auth extends React.Component {
         password: '',
         isUserLoggedIn: false
     }
-componentDidMount =  () => (
-    auth.onAuthStateChanged(
-        user => {
-            user?
-            this.setState({isUserLoggedIn: true})
-            :
-            this.setState({isUserLoggedIn: false})
-        }
+    componentDidMount = () => (
+        auth.onAuthStateChanged(
+            user => {
+                user ?
+                    this.setState({ isUserLoggedIn: true })
+                    :
+                    this.setState({ isUserLoggedIn: false })
+            }
+        )
     )
-)
-onClickLogin = () =>(
-    auth.signInWithEmailAndPassword(this.state.login, this.state.password)
-    .catch(error => {
-        alert('Something is wrong')
-        console.log(error)
-    })
-)
-
+    LogOut = () => (
+        auth.signOut()
+    )
+    onClickLogin = () => (
+        auth.signInWithEmailAndPassword(this.state.login, this.state.password)
+            .catch(error => {
+                alert('Something is wrong')
+                console.log(error)
+            })
+    )
+    onClickLoginGoogle = () => (
+        auth.signInWithPopup(googleProvider)
+    )
     render() {
         return (
             <div>
                 {
                     this.state.isUserLoggedIn === true ?
-                        this.props.children
+                        <div>
+                            <FloatingActionButton
+                                style={{
+                                    position: 'fixed',
+                                    top: 10,
+                                    right: 10,
+                                    zIndex: 9999,
+                                }}
+                                onClick={this.LogOut}
+                            >
+                                X
+                            </FloatingActionButton>
+                            {this.props.children}
+                        </div>
                         :
                         <Paper style={style.paper}>
+                            <h2>Log in!</h2>
                             <Forms
                                 styleLabel={style.input}
                                 valueLogin={this.state.login}
@@ -59,7 +79,7 @@ onClickLogin = () =>(
                                 primary={true}
                                 onClickLogin={this.onClickLogin}
                                 styleButton={style.buttons}
-                                onClickLoginGoogle={() => alert('Click Login by Google')}
+                                onClickLoginGoogle={this.onClickLoginGoogle}
                             />
                         </Paper>
                 }

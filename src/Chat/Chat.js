@@ -1,7 +1,7 @@
 import React from 'react'
 import Input from './inputComponent'
 import { mapObjectToArray } from '../utils'
-import { database } from '../firebaseConfig'
+import { auth, database } from '../firebaseConfig'
 import MessageList from './MessagesList'
 import Paper from 'material-ui/Paper'
 
@@ -13,7 +13,7 @@ const style = {
         marginBottom: 0,
         width: '97.7%'
     },
-    paper:{
+    paper: {
         padding: 15,
         margin: 15,
         marginBottom: 0,
@@ -36,7 +36,6 @@ class Chat extends React.Component {
             'value',
             snapshot => this.setState({
                 messages: mapObjectToArray(snapshot.val()).reverse(),
-                newMessageText: ''
             }
             )
         )
@@ -53,9 +52,14 @@ class Chat extends React.Component {
     onNewMessage = () => (
         databaseMessages.push({
             text: this.state.newMessageText,
-            timestamp: Date.now()
+            timestamp: Date.now(),
+            author: {
+                email: auth.currentUser.email,
+                displayName: auth.currentUser.displayName,
+                img: auth.currentUser.photoURL || `https://api.adorable.io/avatars/40/auth.currentUser.email`
+            }
         }
-        )
+        ), this.setState({ newMessageText: '' })
     )
     deleteMessage = (messageKey) => (
         databaseMessages.child(messageKey).remove()
