@@ -1,5 +1,6 @@
 import React from 'react'
 import Input from './inputComponent'
+import { mapObjectToArray } from '../utils'
 import { database } from '../firebaseConfig'
 const databaseMessages = database.ref('/chat')
 
@@ -12,7 +13,8 @@ class Chat extends React.Component {
     componentDidMount = () => (
         databaseMessages.on(
             'value',
-            snapshot => console.log(snapshot.val())
+            snapshot => console.log(mapObjectToArray(snapshot.val())
+            )
         )
     )
     valueHandle = (event) => (
