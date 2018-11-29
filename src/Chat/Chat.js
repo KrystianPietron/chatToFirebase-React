@@ -13,14 +13,14 @@ class Chat extends React.Component {
     componentDidMount = () => (
         databaseMessages.on(
             'value',
-            snapshot => console.log(mapObjectToArray(snapshot.val())
+            snapshot => this.setState({messages: mapObjectToArray(snapshot.val())}
             )
         )
     )
     valueHandle = (event) => (
         this.setState({ newMessageText: event.target.value })
     )
-
+onNewMessage
     render() {
         return (
             <div>
