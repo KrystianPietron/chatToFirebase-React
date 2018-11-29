@@ -1,26 +1,34 @@
 import React from 'react'
 import Button from './Elemenets/Button'
+import { database } from './firebaseConfig'
 
 const style = {
     button: {
         margin: 15
     }
 }
-const API_URL = `https://poniedzialek-60723.firebaseio.com/cwiczeniafirebase`
 class Counter extends React.Component {
     state = {
         number: 0
     }
+
     componentDidMount = () => (
-        this.loadData()
+        database.ref('/cwiczeniafirebase').on(
+            'value',
+            snapshot => {
+                this.setState({ number: snapshot.val() })
+            }
+        )
     )
+
     incHandler = () => (
-        this.setState({ number: this.state.number + 1 })
+        database.ref('/cwiczeniafirebase').set(this.state.number + 1)
     )
 
     decHandler = () => (
-        this.setState({ number: this.state.number - 1 })
+        database.ref('/cwiczeniafirebase').set(this.state.number - 1)
     )
+
     render() {
         return (
             <div>
