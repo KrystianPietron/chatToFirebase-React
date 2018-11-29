@@ -1,6 +1,5 @@
 import React from 'react'
-import Button from '../Elemenets/Button'
-import Input from '../Elemenets/Input'
+import Forms from './Forms'
 import Paper from 'material-ui/Paper'
 
 const style = {
@@ -26,37 +25,23 @@ class Auth extends React.Component {
         return (
             <div>
                 <Paper style={style.paper}>
-                    <div>
-                        <Input
-                            hintText={'Login'}
+                    <Forms
+                            hintTextLogin={'Login'}
                             style={style.input}
-                            value={this.state.login}
-                            onChange={(event) => this.setState({ login: event.target.value })}
-                        />
-                    </div>
-                    <div>
-                        <Input
-                            hintText={'Password'}
+                            valueLogin={this.state.login}
+                            onChangeLogin={(event) => this.setState({ login: event.target.value })}
+                            hintTextPassword={'Password'}
                             style={style.input}
-                            value={this.state.password}
-                            onChange={(event) => this.setState({ password: event.target.value })}
-                            type={'password'}
-                        />
-                    </div>
-                    <div>
-                        <Button
+                            valuePassword={this.state.password}
+                            onChangePassword={(event) => this.setState({ password: event.target.value })}
                             primary={true}
-                            label={'Login'}
+                            labelLogin={'Login'}
                             style={style.buttons}
-                            onClick={() => alert('Click Login')}
-                        />
-                        <Button
-                            primary={true}
-                            label={'Login by Google'}
+                            onClickLogin={() => alert('Click Login')}
+                            labelLoginGoogle={'Login by Google'}
                             style={style.buttons}
-                            onClick={() => alert('Click Login by Google')}
+                            onClickLoginGoogle={() => alert('Click Login by Google')}
                         />
-                    </div>
                 </Paper>
             </div >
         )
