@@ -13,17 +13,28 @@ class Chat extends React.Component {
     componentDidMount = () => (
         databaseMessages.on(
             'value',
-            snapshot => this.setState({ messages: mapObjectToArray(snapshot.val()) }
+            snapshot => this.setState({
+                messages: mapObjectToArray(snapshot.val())
+            }
             )
         )
     )
     valueHandle = (event) => (
-        this.setState({ newMessageText: event.target.value })
+        this.setState({
+            newMessageText: event.target.value
+        }
+        )
     )
     componentWillUnmount = () => {
         databaseMessages.off()
     }
-    onNewMessage
+    onNewMessage = () => (
+        databaseMessages.push({
+            text: this.state.newMessageText,
+            timestamp: Date.now()
+        }
+        )
+    )
     render() {
         return (
             <div>
