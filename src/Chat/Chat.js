@@ -14,7 +14,8 @@ class Chat extends React.Component {
         databaseMessages.on(
             'value',
             snapshot => this.setState({
-                messages: mapObjectToArray(snapshot.val())
+                messages: mapObjectToArray(snapshot.val()).reverse(),
+                newMessageText: ''
             }
             )
         )
