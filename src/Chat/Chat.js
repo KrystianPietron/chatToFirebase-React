@@ -1,7 +1,7 @@
 import React from 'react'
 import Input from './inputComponent'
 import { database } from '../firebaseConfig'
-
+const databaseMessages = database.ref('/chat')
 
 class Chat extends React.Component {
     state = {
@@ -10,11 +10,14 @@ class Chat extends React.Component {
     }
 
     componentDidMount = () => (
-        
+        databaseMessages.on(
+            'value',
+            snapshot => console.log(snapshot.val())
+        )
     )
-   valueHandle = (event) => (
-       this.setState({newMessageText: event.target.value})
-   )
+    valueHandle = (event) => (
+        this.setState({ newMessageText: event.target.value })
+    )
 
     render() {
         return (
