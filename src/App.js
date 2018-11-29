@@ -8,7 +8,10 @@ class App extends Component {
     return (
       <div className="App">
         {/* <Counter /> */}
-        <Auth />
+
+        <Auth>
+          <Chat />
+        </Auth>
       </div>
     );
   }

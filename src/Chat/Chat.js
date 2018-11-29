@@ -7,14 +7,21 @@ import Paper from 'material-ui/Paper'
 
 const databaseMessages = database.ref('/chat')
 const style = {
-    paper: {
+    paperList: {
+        padding: 15,
+        margin: 15,
+        marginBottom: 0,
+        width: '97.7%'
+    },
+    paper:{
         padding: 15,
         margin: 15,
         marginBottom: 0,
         position: 'fixed',
         bottom: 0,
         zindedx: 9999,
-        width: '98%'
+        width: '93.7%'
+
     }
 }
 class Chat extends React.Component {
@@ -55,7 +62,7 @@ class Chat extends React.Component {
     )
     render() {
         return (
-            <div>
+            <Paper style={style.paperList}>
                 <div>Chat :D</div>
                 <div>
                     <MessageList
@@ -75,7 +82,7 @@ class Chat extends React.Component {
                         fullWidth
                     />
                 </Paper>
-            </div>
+            </Paper>
         )
     }
 }

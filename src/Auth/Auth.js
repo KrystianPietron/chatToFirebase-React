@@ -7,9 +7,12 @@ const style = {
         margin: 15
     },
     input: {
-        margin: 20
+        margin: 20,
     },
     paper: {
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
         margin: 30,
         padding: 15
     }
@@ -17,32 +20,32 @@ const style = {
 class Auth extends React.Component {
     state = {
         login: '',
-        password: ''
+        password: '',
+        isUserLoggedIn: true
     }
 
 
     render() {
         return (
             <div>
-                <Paper style={style.paper}>
-                    <Forms
-                            hintTextLogin={'Login'}
-                            style={style.input}
+                {this.state.isUserLoggedIn === true ?
+                    this.props.children
+                    :
+                    <Paper style={style.paper}>
+                        <Forms
+                            styleLabel={style.input}
                             valueLogin={this.state.login}
                             onChangeLogin={(event) => this.setState({ login: event.target.value })}
-                            hintTextPassword={'Password'}
-                            style={style.input}
                             valuePassword={this.state.password}
                             onChangePassword={(event) => this.setState({ password: event.target.value })}
                             primary={true}
-                            labelLogin={'Login'}
-                            style={style.buttons}
                             onClickLogin={() => alert('Click Login')}
-                            labelLoginGoogle={'Login by Google'}
-                            style={style.buttons}
+                            styleButton={style.buttons}
                             onClickLoginGoogle={() => alert('Click Login by Google')}
                         />
-                </Paper>
+                    </Paper>
+                }
+
             </div >
         )
     }

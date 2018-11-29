@@ -6,16 +6,16 @@ const Forms = (props) => (
     <div>
         <div>
             <Input
-                hintText={props.hintTextLogin}
-                style={props.style}
+                hintText={"Login"}
+                style={props.styleLabel}
                 value={props.valueLogin}
                 onChange={props.onChangeLogin}
             />
         </div >
         <div>
             <Input
-                hintText={props.hintTextPassword}
-                style={props.style}
+                hintText={"Password"}
+                style={props.styleLabel}
                 value={props.valuePassword}
                 onChange={props.onChangePassword}
             />
@@ -23,14 +23,14 @@ const Forms = (props) => (
         <div>
             <Button
                 primary={props.primary}
-                label={props.labelLogin}
-                style={props.style}
+                label={"Login"}
+                style={props.styleButton}
                 onClick={props.onClickLogin}
             />
             <Button
                 primary={props.primary}
-                label={props.labelLoginGoogle}
-                style={props.style}
+                label={'Login by Google'}
+                style={props.styleButton}
                 onClick={props.onClickLoginGoogle}
             />
         </div>
