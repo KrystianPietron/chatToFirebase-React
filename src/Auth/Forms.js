@@ -18,6 +18,7 @@ const Forms = (props) => (
                 style={props.styleLabel}
                 value={props.valuePassword}
                 onChange={props.onChangePassword}
+                type='password'
             />
         </div>
         <div>
