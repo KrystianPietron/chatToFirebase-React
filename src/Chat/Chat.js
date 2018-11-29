@@ -50,17 +50,21 @@ class Chat extends React.Component {
         }
         )
     )
+    deleteMessage = (messageKey) => (
+        databaseMessages.child(messageKey).remove()
+    )
     render() {
         return (
             <div>
                 <div>Chat :D</div>
                 <div>
                     <MessageList
-                        message={this.state.messages} />
+                        message={this.state.messages}
+                        deleteMessage={this.deleteMessage} />
 
                 </div>
                 <Paper style={style.paper}
-                   >
+                >
                     <Input
                         hintText={"Message"}
                         onChange={this.valueHandle}
