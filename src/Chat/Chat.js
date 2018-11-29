@@ -2,6 +2,8 @@ import React from 'react'
 import Input from './inputComponent'
 import { mapObjectToArray } from '../utils'
 import { database } from '../firebaseConfig'
+import MessageList from './MessagesList'
+
 const databaseMessages = database.ref('/chat')
 
 class Chat extends React.Component {
@@ -48,11 +50,10 @@ class Chat extends React.Component {
                     label={"Send"}
                     primary={true}
                 />
-                <div>{this.state.messages.map(
-                    message => <div key={message.key}>
-                        {message.text}
-                    </div>)
-                }
+                <div>
+                    <MessageList
+                        message={this.state.messages} />
+
                 </div>
             </div>
         )
